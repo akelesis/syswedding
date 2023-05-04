@@ -1,6 +1,13 @@
-<script setup lang="ts">
+<script setup lang="ts"></script>
 
-</script>
+<template>
+  <section class="homepage-cover">
+    <div>
+      <h3>Estamos felizes por compartilhar o nosso dia especial com você</h3>
+      <h1>Marcus e Carina</h1>
+    </div>
+  </section>
+</template>
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
@@ -33,20 +40,8 @@
       font-family: 'Tangerine', cursive;
       font-size: 60px;
       line-height: 85%;
-      color: #BB6503;
+      color: #bb6503;
     }
   }
-  
 }
 </style>
-
-<template>
-  <section class="homepage-cover">
-    <div>
-      <h3>Estamos felizes por compartilhar o nosso dia especial com você</h3>
-      <h1>
-        Marcus e Carina
-      </h1>
-    </div>
-  </section>
-</template>
