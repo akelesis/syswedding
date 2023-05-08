@@ -1,9 +1,23 @@
-<script setup lang="ts">
-const props = defineProps(['label', 'handler'])
+<script lang="ts">
+export default {
+  props: {
+    width: {
+      type: String,
+      required: true,
+      default: '55%'
+    },
+    label: {
+      type: String,
+      required: true
+    }
+  }
+}
 </script>
 
 <template>
-  <button class="confirm-button" @click.native="props.handler">{{ props.label }}</button>
+  <button class="confirm-button" :style="`width:${width}`">
+    {{ label }}
+  </button>
 </template>
 
 <style lang="scss" scoped>
@@ -12,7 +26,6 @@ const props = defineProps(['label', 'handler'])
   background-color: #d8c6ff;
   color: #fff;
   height: 40px;
-  width: 55%;
   border: none;
   margin-top: 30px;
   font-size: 20px;
