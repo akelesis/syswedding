@@ -26,7 +26,7 @@ export default {
 </script>
 
 <template>
-  <div class="sign-up-confirm">
+  <div class="sign-up-error">
     <div>
       <h3>Desculpe, não estavamos te esperando!</h3>
       <underline width="270px" />
@@ -45,7 +45,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
 
-.sign-up-confirm {
+.sign-up-error {
   display: flex;
   flex-direction: column;
   align-items: center;
