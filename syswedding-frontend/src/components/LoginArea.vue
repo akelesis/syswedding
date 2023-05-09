@@ -1,17 +1,49 @@
 <script lang="ts">
-import router from '@/router';
-import ConfirmButton from './ConfirmButton.vue';
+import router from '@/router'
+import ConfirmButton from './ConfirmButton.vue'
+import InputComponent from './InputComponent.vue'
+import Underline from './Underline.vue'
 export default {
+  data() {
+    return {
+      phone: '',
+      password: ''
+    }
+  },
   methods: {
-    confirmationButtonHandler () {
+    confirmationButtonHandler() {
       this.$router.push('/guest-confirm')
     }
   },
   components: {
-    ConfirmButton
+    ConfirmButton,
+    Underline,
+    InputComponent
   }
 }
 </script>
+
+<template>
+  <section class="login-area">
+    <div class="login-container">
+      <div>
+        <h3>Área do Convidado</h3>
+        <Underline width="170px" />
+      </div>
+      <div class="login-subtitle">
+        Olá, que bom te ver por aqui! Preparamos uma área especial pra você com muito carinho!
+      </div>
+      <div class="login-form">
+        <input-component type="text" v-model="phone" placeholder="Telefone" />
+        <input-component type="password" v-model="password" placeholder="Senha" />
+      </div>
+      <div class="first-access-link">
+        <router-link to="/first-access">É o seu primeiro acesso? então clique aqui!</router-link>
+      </div>
+      <confirm-button label="Entrar" @click="confirmationButtonHandler"></confirm-button>
+    </div>
+  </section>
+</template>
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap');
@@ -50,32 +82,10 @@ export default {
       align-items: center;
       margin-top: 30px;
       width: 60%;
-      
-      input {
-        border: none;
-        border-bottom: 1px solid #D9D9D9;
-        margin: 10px 0;
-        width: 100%;
-      }
-      ::placeholder {
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 18px;
-        color: #D0D0D0;
-      }
-      input:focus {
-        border-bottom: 3px solid #D8C6FF;
-        outline: none;
-        transition: .2s;
-      }
     }
   }
-  .underline {
-    width: 170px;
-    height: 3px;
-    background-color: #d8c6ff;
-  }
   a {
-    color: #CFBAFE;
+    color: #cfbafe;
     text-decoration: none;
     margin-top: 20px;
     font-family: 'Roboto Condensed', sans-serif;
@@ -85,27 +95,4 @@ export default {
     margin-top: 20px;
   }
 }
-
 </style>
-
-<template>
-  <section class="login-area">
-    <div class="login-container">
-      <div>
-        <h3>Área do Convidado</h3>
-        <div class="underline"></div>
-      </div>
-      <div class="login-subtitle">
-        Olá, que bom te ver por aqui! Preparamos uma área especial pra você com muito carinho!
-      </div>
-      <div class="login-form">
-        <input type="text" placeholder="Telefone">
-        <input type="password" placeholder="Senha">
-      </div>
-      <div class="first-access-link">
-        <router-link to='/firstaccess'>É o seu primeiro acesso? então clique aqui!</router-link>
-      </div>
-      <confirm-button label="Entrar" :handler="confirmationButtonHandler"></confirm-button>
-    </div>
-  </section>
-</template>
