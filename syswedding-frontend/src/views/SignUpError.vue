@@ -26,25 +26,17 @@ export default {
 </script>
 
 <template>
-  <div class="first-access">
+  <div class="sign-up-error">
     <div>
-      <h3>Olá, estavamos te esperando!</h3>
+      <h3>Desculpe, não estavamos te esperando!</h3>
       <underline width="270px" />
     </div>
-    <div class="register-subtitle">
-      Confirme seu telefone e crie uma senha para que você possa acessar a área dos convidados!
-    </div>
-    <div class="register-form">
-      <input-component type="text" v-model="phone" placeholder="Telefone" />
-      <input-component type="email" v-model="email" placeholder="E-mail" />
-      <input-component type="password" v-model="password" placeholder="Senha" />
-      <input-component
-        type="password"
-        v-model="confirmPassword"
-        placeholder="Confirmação de senha"
-      />
-    </div>
-    <confirm-button label="Entrar" @click="confirmationButtonHandler"></confirm-button>
+    <img src="../assets/images/uncheck.svg" alt="" />
+    <confirm-button
+      label="Voltar"
+      width="65%"
+      @click="confirmationButtonHandler"
+    ></confirm-button>
   </div>
 </template>
 
@@ -53,35 +45,22 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
 
-.first-access {
+.sign-up-error {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
   margin-top: 36px;
 
+  div {
+    margin-bottom: 15px;
+  }
+
   h3 {
     text-align: center;
     font-family: 'Cormorant Garamond', serif;
     color: #949494;
     font-size: 20px;
-  }
-
-  .register-subtitle {
-    width: 85%;
-    font-family: 'Cormorant Garamond', serif;
-    text-align: center;
-    margin-top: 20px;
-    color: #949494;
-  }
-
-  .register-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-top: 30px;
-    width: 60%;
   }
 }
 </style>

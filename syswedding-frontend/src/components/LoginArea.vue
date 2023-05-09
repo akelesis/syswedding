@@ -40,7 +40,7 @@ export default {
       <div class="first-access-link">
         <router-link to="/first-access">É o seu primeiro acesso? então clique aqui!</router-link>
       </div>
-      <confirm-button label="Entrar" :handler="confirmationButtonHandler"></confirm-button>
+      <confirm-button label="Entrar" @click="confirmationButtonHandler"></confirm-button>
     </div>
   </section>
 </template>
