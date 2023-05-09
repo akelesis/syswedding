@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import GuestsArea from '../views/GuestsArea.vue'
 import FirstAccess from '../views/FirstAccess.vue'
 import SignUpConfirm from '../views/SignUpConfirm.vue'
+import SignUpError from '../views/SignUpError.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -26,6 +27,11 @@ const router = createRouter({
       path: '/sign-up-confirm',
       name: 'signUpConfirm',
       component: SignUpConfirm,
+    },
+    {
+      path: '/sign-up-error',
+      name: 'signUpError',
+      component: SignUpError,
     },
   ]
 })
