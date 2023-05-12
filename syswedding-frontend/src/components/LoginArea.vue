@@ -41,6 +41,9 @@ export default {
         <router-link to="/first-access">É o seu primeiro acesso? então clique aqui!</router-link>
       </div>
       <confirm-button label="Entrar" @click="confirmationButtonHandler"></confirm-button>
+      <div class="password-recovery">
+        <router-link to="/password-recovery">Esqueceu a senha? Clique aqui!</router-link>
+      </div>
     </div>
   </section>
 </template>
@@ -91,7 +94,9 @@ export default {
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 15px;
   }
-  .first-access-link {
+
+  .first-access-link,
+  .password-recovery {
     margin-top: 20px;
   }
 }
