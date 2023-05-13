@@ -5,7 +5,7 @@ import FirstAccess from '../views/FirstAccess.vue'
 import SignUpConfirm from '../views/SignUpConfirm.vue'
 import SignUpError from '../views/SignUpError.vue'
 import PasswordRecovery from '../views/PasswordRecovery.vue'
-// import PasswordReset from '../views/PasswordReset.vue'
+import PasswordReset from '../views/PasswordReset.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,11 +40,11 @@ const router = createRouter({
       name: 'passwordRecovery',
       component: PasswordRecovery,
     },
-    // {
-    //   path: '/password-reset',
-    //   name: 'passwordReset',
-    //   component: PasswordReset,
-    // },
+    {
+      path: '/password-reset',
+      name: 'passwordReset',
+      component: PasswordReset,
+    },
   ]
 })
 
