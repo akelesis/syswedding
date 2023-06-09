@@ -7,7 +7,6 @@ import SignUpError from '../views/SignUpError.vue'
 import PasswordRecovery from '../views/PasswordRecovery.vue'
 import PasswordReset from '../views/PasswordReset.vue'
 import DeclineAttendance from '../views/DeclineAttendance.vue'
-// import ConfirmAttendance from '../views/ConfirmAttendence.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -52,11 +51,6 @@ const router = createRouter({
       name: 'declineAttendance',
       component: DeclineAttendance,
     },
-    // {
-    //   path: '/confirm',
-    //   name: 'confirmAttendance',
-    //   component: ConfirmAttendance,
-    // },
   ]
 })
 
