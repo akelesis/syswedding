@@ -6,6 +6,7 @@ import SignUpConfirm from '../views/SignUpConfirm.vue'
 import SignUpError from '../views/SignUpError.vue'
 import PasswordRecovery from '../views/PasswordRecovery.vue'
 import PasswordReset from '../views/PasswordReset.vue'
+import DeclineAttendance from '../views/DeclineAttendance.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -44,6 +45,11 @@ const router = createRouter({
       path: '/password-reset',
       name: 'passwordReset',
       component: PasswordReset,
+    },
+    {
+      path: '/decline',
+      name: 'declineAttendance',
+      component: DeclineAttendance,
     },
   ]
 })

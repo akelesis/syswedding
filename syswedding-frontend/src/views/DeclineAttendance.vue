@@ -5,10 +5,7 @@ import LayoutComponent from '@/components/LayoutComponent.vue'
 export default {
   methods: {
     confirmationButtonHandler() {
-      this.$router.push('/confirm')
-    },
-    declineButtonHandler() {
-      this.$router.push('/decline')
+      this.$router.push('/')
     }
   },
   components: {
@@ -19,18 +16,13 @@ export default {
 </script>
 
 <template>
-  <div class="guest-area">
+  <div class="decline-area">
     <layout-component>
-      <div class="guest-subtitle">
-        Agora vamos para o que interessa! Podemos confirmar a sua presença e da sua familia?
+      <div class="decline-subtitle">
+        Ah, que pena! Sentiremos sua falta :’(
       </div>
       <div class="button-container">
-        <confirm-button label="Sim" @click="confirmationButtonHandler"></confirm-button>
-        <confirm-button
-          label="Não"
-          type="decline"
-          @click="declineButtonHandler"
-        ></confirm-button>
+        <confirm-button label="Sair" @click="confirmationButtonHandler"></confirm-button>
       </div>
     </layout-component>
   </div>
@@ -41,19 +33,20 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
 
-.guest-area {
-  .guest-subtitle {
+.decline-area {
+  .decline-subtitle {
     width: 85%;
     font-family: 'Cormorant Garamond', serif;
     text-align: center;
     margin-top: 20px;
     color: #949494;
+    padding: 75px 0;
   }
 
   .button-container {
-    width: 70%;
+    width: 80%;
     display: flex;
-    gap: 20px;
+    justify-content: center;
   }
 }
 </style>
