@@ -9,9 +9,8 @@ export default {
   data() {
     return {
       confirmedGuests: ['Valber Francisco dos Santos'],
-      guestsInput: [],
+      guestsInput: [] as string[],
       guestsCount: 5,
-      guest: ''
     }
   },
   methods: {
@@ -19,10 +18,16 @@ export default {
       this.$router.push('/')
     },
     addGuest() {
+      this.guestsInput.push('')
       this.guestsCount--
     },
     removeGuest() {
+      this.guestsInput.pop()
       this.guestsCount++
+    },
+    showData(index: number) {
+      this.confirmedGuests.push(this.guestsInput[index])
+      this.guestsInput.pop()
     }
   },
   components: {
@@ -42,7 +47,13 @@ export default {
       </div>
       <div class="guests-container">
         <confirm-guest v-for="guest in confirmedGuests" :label="guest" />
-        <input-guest placeholder="Nome completo" v-model="guest" />
+        <input-guest
+          v-for="(guest, index) in guestsInput"
+          type="text"
+          placeholder="Nome completo"
+          v-model="guestsInput[index]"
+          @save-guest="showData(index)"
+        />
       </div>
       <div class="guests-control">
         <button @click="removeGuest"><font-awesome-icon :icon="['fas', 'minus']" /></button>
