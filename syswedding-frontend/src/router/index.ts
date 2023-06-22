@@ -8,6 +8,7 @@ import PasswordRecovery from '../views/PasswordRecovery.vue'
 import PasswordReset from '../views/PasswordReset.vue'
 import DeclineAttendance from '../views/DeclineAttendance.vue'
 import ConfirmAttendance from '@/views/ConfirmAttendance.vue'
+import ConfirmedGuests from '@/views/ConfirmedGuests.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,6 +57,11 @@ const router = createRouter({
       path: '/confirm',
       name: 'confirmAttendance',
       component: ConfirmAttendance,
+    },
+    {
+      path: '/guests',
+      name: 'confirmedGuests',
+      component: ConfirmedGuests,
     },
   ]
 })
