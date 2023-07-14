@@ -8,6 +8,7 @@ import PasswordRecovery from '../views/PasswordRecovery.vue'
 import PasswordReset from '../views/PasswordReset.vue'
 import DeclineAttendance from '../views/DeclineAttendance.vue'
 import ConfirmAttendance from '@/views/ConfirmAttendance.vue'
+import ScanGuest from '@/views/ScanGuest.vue'
 import GiftsList from '@/views/GiftsList.vue'
 import ConfirmedGuests from '@/views/ConfirmedGuests.vue'
 
@@ -58,6 +59,11 @@ const router = createRouter({
       path: '/confirm',
       name: 'confirmAttendance',
       component: ConfirmAttendance,
+    },
+    {
+      path: '/scan-guest',
+      name: 'scanGuest',
+      component: ScanGuest,
     },
     {
       path: '/gifts-list',
