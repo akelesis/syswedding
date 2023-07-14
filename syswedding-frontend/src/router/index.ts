@@ -9,6 +9,7 @@ import PasswordReset from '../views/PasswordReset.vue'
 import DeclineAttendance from '../views/DeclineAttendance.vue'
 import ConfirmAttendance from '@/views/ConfirmAttendance.vue'
 import GiftsList from '@/views/GiftsList.vue'
+import ConfirmedGuests from '@/views/ConfirmedGuests.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -62,6 +63,11 @@ const router = createRouter({
       path: '/gifts-list',
       name: 'giftsList',
       component: GiftsList,
+    },
+    {
+      path: '/guests',
+      name: 'confirmedGuests',
+      component: ConfirmedGuests,
     },
   ]
 })
