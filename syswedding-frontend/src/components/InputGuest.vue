@@ -1,5 +1,6 @@
 <script lang="ts">
 export default {
+  emits: ['saveGuest', 'update:modelValue'],
   props: {
     type: {
       type: String,
@@ -32,7 +33,7 @@ export default {
       :placeholder="placeholder"
       @input="updateValue"
     />
-    <button>Salvar</button>
+    <button @click="$emit('saveGuest')">Salvar</button>
   </div>
 </template>
 <style lang="scss" scoped>
