@@ -8,9 +8,9 @@ import ConfirmGuest from '@/components/ConfirmGuest.vue'
 export default {
   data() {
     return {
-      confirmedGuests: ['Valber Francisco dos Santos'],
+      confirmedGuests: [] as string[],
       guestsInput: [] as string[],
-      guestsCount: 5,
+      guestsCount: 0,
     }
   },
   methods: {

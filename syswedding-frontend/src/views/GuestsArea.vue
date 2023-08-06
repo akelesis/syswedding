@@ -2,18 +2,73 @@
 import router from '@/router'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import LayoutComponent from '@/components/LayoutComponent.vue'
+import { baseUrl } from '@/global'
+import axios from 'axios'
+
+interface GuestProps {
+  email: string
+  password: string
+  gift_item_id: string
+  status: string
+  phone: string
+}
+
 export default {
+  data() {
+    return {
+      guest: {} as GuestProps
+    }
+  },
   methods: {
     confirmationButtonHandler() {
-      this.$router.push('/confirm')
+      axios
+        .patch(`${baseUrl}/guest/${this.guest.phone}`, {
+          status: 'active',
+          email: this.guest.email,
+          password: this.guest.password,
+          confirm_password: this.guest.password,
+          gift_item_id: ''
+        })
+        .then(() => {
+          this.$router.push('/confirm-attendance')
+        })
     },
     declineButtonHandler() {
-      this.$router.push('/decline')
+      axios
+        .patch(`${baseUrl}/guest/${this.guest.phone}`, {
+          status: 'cancelled',
+          email: this.guest.email,
+          password: this.guest.password,
+          confirm_password: this.guest.password,
+          gift_item_id: ''
+        })
+        .then(() => {
+          this.$router.push('/decline')
+        })
+    },
+    getGuest() {
+      axios
+        .get(`${baseUrl}/guest/${this.$route.query.id}`, {
+          headers: {
+            Authorization: `Bearer ${this.guestToken}`
+          }
+        })
+        .then((res) => {
+          this.guest = res.data
+        })
     }
+  },
+  mounted() {
+    this.getGuest()
   },
   components: {
     ConfirmButton,
     LayoutComponent
+  },
+  computed: {
+    guestToken() {
+      return localStorage.getItem('guestToken')
+    }
   }
 }
 </script>
@@ -26,11 +81,7 @@ export default {
       </div>
       <div class="button-container">
         <confirm-button label="Sim" @click="confirmationButtonHandler"></confirm-button>
-        <confirm-button
-          label="Não"
-          type="decline"
-          @click="declineButtonHandler"
-        ></confirm-button>
+        <confirm-button label="Não" type="decline" @click="declineButtonHandler"></confirm-button>
       </div>
     </layout-component>
   </div>
