@@ -56,7 +56,7 @@ const router = createRouter({
       component: DeclineAttendance,
     },
     {
-      path: '/confirm',
+      path: '/confirm-attendance',
       name: 'confirmAttendance',
       component: ConfirmAttendance,
     },

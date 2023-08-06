@@ -4,13 +4,27 @@ import ConfirmButton from '../components/ConfirmButton.vue'
 import LayoutComponent from '@/components/LayoutComponent.vue'
 import InputGuest from '@/components/InputGuest.vue'
 import ConfirmGuest from '@/components/ConfirmGuest.vue'
+import axios from 'axios'
+import { baseUrl } from '@/global'
+
+interface GuestProps {
+  id: string
+  name: string
+  email: string
+  password: string
+  gift_item_id: string
+  status: string
+  phone: string
+  invites: number
+}
 
 export default {
   data() {
     return {
-      confirmedGuests: ['Valber Francisco dos Santos'],
+      confirmedGuests: [] as string[],
       guestsInput: [] as string[],
-      guestsCount: 5,
+      guest: {} as GuestProps,
+      invites: 0
     }
   },
   methods: {
@@ -19,16 +33,35 @@ export default {
     },
     addGuest() {
       this.guestsInput.push('')
-      this.guestsCount--
+      this.invites--
     },
     removeGuest() {
-      this.guestsInput.pop()
-      this.guestsCount++
+      if (this.invites < this.guest.invites) {
+        this.guestsInput.pop()
+        this.invites++
+      }
     },
     showData(index: number) {
       this.confirmedGuests.push(this.guestsInput[index])
       this.guestsInput.pop()
+    },
+    getGuest() {
+      const guestToken = localStorage.getItem('guestToken')
+
+      axios
+        .get(`${baseUrl}/guest/${this.$route.query.id}`, {
+          headers: {
+            Authorization: `Bearer ${guestToken}`
+          }
+        })
+        .then((res) => {
+          this.guest = res.data
+          this.invites = this.guest.invites
+        })
     }
+  },
+  mounted() {
+    this.getGuest()
   },
   components: {
     ConfirmButton,
@@ -41,7 +74,7 @@ export default {
 
 <template>
   <div class="confirm-area">
-    <layout-component>
+    <layout-component :name="guest.name">
       <div class="confirm-subtitle">
         Que legal, confirma então as informações de quem vai estar lá (incluindo você, é claro)
       </div>
@@ -57,8 +90,8 @@ export default {
       </div>
       <div class="guests-control">
         <button @click="removeGuest"><font-awesome-icon :icon="['fas', 'minus']" /></button>
-        <span>{{ guestsCount }}</span>
-        <button :disabled="guestsCount === 0 ? true : false" @click="addGuest">
+        <span>{{ invites }}</span>
+        <button :disabled="invites === 0 ? true : false" @click="addGuest">
           <font-awesome-icon :icon="['fas', 'plus']" />
         </button>
       </div>
