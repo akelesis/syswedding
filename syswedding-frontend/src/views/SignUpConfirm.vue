@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     confirmationButtonHandler() {
-      if (this.guestStatus !== 'active') {
+      if (this.guestStatus === 'inactive') {
         this.$router.push('/guest-confirm?id=' + this.guestId)
       } else {
         this.$router.push('/confirm-attendance')

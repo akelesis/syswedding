@@ -3,16 +3,44 @@ import router from '@/router'
 import ConfirmButton from './ConfirmButton.vue'
 import InputComponent from './InputComponent.vue'
 import Underline from './Underline.vue'
+import axios from 'axios'
+import { baseUrl } from '@/global'
+
 export default {
   data() {
     return {
-      phone: '',
-      password: ''
+      email: '',
+      password: '',
     }
   },
   methods: {
-    confirmationButtonHandler() {
-      this.$router.push('/guest-confirm')
+    guestLogin() {
+      axios
+        .post(`${baseUrl}/login`, { email: this.email, password: this.password })
+        .then((res) => {
+          localStorage.setItem('guestToken', res.data.token)
+        })
+        .then(() => {
+          axios
+            .get(`${baseUrl}/guest/find/${this.email}`, {
+              headers: {
+                Authorization: `Bearer ${localStorage.getItem('guestToken')}`
+              }
+            })
+            .then((res) => {
+              if (res.data.status === 'inactive') {
+                this.$router.push('/guest-confirm?id=' + res.data.id)
+              }
+              if (res.data.status === 'cancelled') {
+                alert('Usuário declinou o convite!')
+                window.location.href = 'https://www.parperfeito.com.br'
+              } else {
+                this.$router.push('/confirm-attendance')
+              }
+            }).catch((err) => {
+              console.log(err)
+            })
+        })
     }
   },
   components: {
@@ -34,13 +62,13 @@ export default {
         Olá, que bom te ver por aqui! Preparamos uma área especial pra você com muito carinho!
       </div>
       <div class="login-form">
-        <input-component type="text" v-model="phone" placeholder="Telefone" />
+        <input-component type="text" v-model="email" placeholder="Email" />
         <input-component type="password" v-model="password" placeholder="Senha" />
       </div>
       <div class="first-access-link">
         <router-link to="/first-access">É o seu primeiro acesso? então clique aqui!</router-link>
       </div>
-      <confirm-button label="Entrar" @click="confirmationButtonHandler"></confirm-button>
+      <confirm-button label="Entrar" @click="guestLogin"></confirm-button>
       <div class="password-recovery">
         <router-link to="/password-recovery">Esqueceu a senha? Clique aqui!</router-link>
       </div>

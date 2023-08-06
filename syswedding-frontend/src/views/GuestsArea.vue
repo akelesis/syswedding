@@ -6,6 +6,8 @@ import { baseUrl } from '@/global'
 import axios from 'axios'
 
 interface GuestProps {
+  id: string
+  name: string
   email: string
   password: string
   gift_item_id: string
@@ -30,7 +32,7 @@ export default {
           gift_item_id: ''
         })
         .then(() => {
-          this.$router.push('/confirm-attendance')
+          this.$router.push('/confirm-attendance?id=' + this.guest.id)
         })
     },
     declineButtonHandler() {
@@ -75,7 +77,7 @@ export default {
 
 <template>
   <div class="guest-area">
-    <layout-component>
+    <layout-component :name="guest.name">
       <div class="guest-subtitle">
         Agora vamos para o que interessa! Podemos confirmar a sua presença e da sua familia?
       </div>

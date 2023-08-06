@@ -4,6 +4,12 @@ import HeaderComponent from '@/components/HeaderComponent.vue'
 export default {
   components: {
     HeaderComponent
+  },
+  props: {
+    name: {
+      type: String,
+      required: true
+    }
   }
 }
 </script>
@@ -12,7 +18,7 @@ export default {
   <div class="layout-component">
     <header-component />
     <div class="layout-title">
-      <h3>Olá Valber!</h3>
+      <h3>Olá {{ name }}!</h3>
     </div>
     <slot />
   </div>
