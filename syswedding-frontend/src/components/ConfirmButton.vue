@@ -9,22 +9,28 @@ export default {
     label: {
       type: String,
       required: true
+    },
+    type: {
+      type: String,
+      default: 'confirm'
     }
   }
 }
 </script>
 
 <template>
-  <button class="confirm-button" :style="`width:${width}`">
+  <button
+    :class="type == 'confirm' ? 'confirm-button' : 'decline-button'"
+    :style="`width:${width}`"
+  >
     {{ label }}
   </button>
 </template>
 
 <style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap');
-.confirm-button {
-  background-color: #d8c6ff;
-  color: #fff;
+.confirm-button,
+.decline-button {
   height: 40px;
   border: none;
   margin-top: 30px;
@@ -32,6 +38,16 @@ export default {
   border-radius: 2px;
   font-family: 'Roboto Condensed', sans-serif;
   box-shadow: 0px 1px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.confirm-button {
+  background-color: #d8c6ff;
+  color: #fff;
+}
+
+.decline-button {
+  background-color: #fff;
+  color: #d8c6ff;
 }
 
 .confirm-button:hover {

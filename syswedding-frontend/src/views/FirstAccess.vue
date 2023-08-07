@@ -3,20 +3,59 @@ import Underline from '@/components/Underline.vue'
 import router from '@/router'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import InputComponent from '@/components/InputComponent.vue'
+import axios from 'axios'
+import { baseUrl } from '../global'
+import GiftsList from './GiftsList.vue'
+
 export default {
   data() {
     return {
       phone: '',
       email: '',
       password: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      giftItem: '',
+      guestId: '',
     }
   },
   methods: {
     confirmationButtonHandler() {
       this.$router.push('/')
+    },
+    activateGuest() {
+      if (this.password === this.confirmPassword) {
+        axios
+          .patch(`${baseUrl}/guest/${this.phone}`, {
+            email: this.email,
+            password: this.password,
+            confirm_password: this.confirmPassword,
+            gift_item_id: this.giftItem
+          })
+          .then((res) => {
+            if (res.data.status != 404) {
+              this.guestId = res.data.id
+
+              axios
+                .post(`${baseUrl}/login`, { email: this.email, password: this.password })
+                .then((res) => {
+                  localStorage.setItem('guestToken', res.data.token)
+                  this.$router.push('/sign-up-confirm?id=' + this.guestId)
+                })
+            } else {
+              this.$router.push('/sign-up-error')
+            }
+          })
+          .catch((err) => {
+            this.$router.push('/sign-up-error')
+          })
+      } else {
+        alert('Confirmação de senha não confere!')
+      }
     }
   },
+  // computed: {
+  //   ...mapState(useStore, ['guestToken'])
+  // },
   components: {
     ConfirmButton,
     Underline,
@@ -44,7 +83,7 @@ export default {
         placeholder="Confirmação de senha"
       />
     </div>
-    <confirm-button label="Entrar" @click="confirmationButtonHandler"></confirm-button>
+    <confirm-button label="Entrar" @click="activateGuest"></confirm-button>
   </div>
 </template>
 
