@@ -3,17 +3,50 @@ import router from '@/router'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import LayoutComponent from '@/components/LayoutComponent.vue'
 import Underline from '@/components/Underline.vue'
+import axios from 'axios'
+import { baseUrl } from '@/global'
+import type { GuestProps } from '../models/GuestProps.model'
+import type { InviteProps } from '../models/InviteProps.model'
 
 export default {
   data() {
     return {
-      confirmedGuests: ['Valber Francisco dos Santos', 'Breno Santos Gomes']
+      guest: {} as GuestProps,
+      confirmedGuests: [] as InviteProps[]
     }
   },
   methods: {
     confirmationButtonHandler() {
       this.$router.push('/')
+    },
+    getGuest() {
+      const guestToken = localStorage.getItem('guestToken')
+
+      axios
+        .get(`${baseUrl}/guest/${this.$route.query.id}`, {
+          headers: {
+            Authorization: `Bearer ${guestToken}`
+          }
+        })
+        .then((res) => {
+          this.guest = res.data
+          this.guest.invites.forEach((element) => {
+            this.confirmedGuests.push(element)
+          })
+        })
+    },
+    scanInvite(guestId: string) {
+      this.$router.push('/scan-guest?id=' + guestId)
+    },
+    giftList() {
+      alert('Em breve!')
+    },
+    editInvite() {
+      this.$router.push('/confirm-attendance?id=' + this.guest.id)
     }
+  },
+  mounted() {
+    this.getGuest()
   },
   components: {
     ConfirmButton,
@@ -25,25 +58,25 @@ export default {
 
 <template>
   <div class="guests-area">
-    <layout-component>
+    <layout-component :name="guest.name">
       <div>
         <h3>Convidados confirmados</h3>
         <Underline width="200px" />
       </div>
       <div class="guests-container">
         <div v-for="guest in confirmedGuests" class="confirm-guest">
-          <span>{{ guest }}</span>
-          <font-awesome-icon :icon="['fas', 'qrcode']" />
+          <span>{{ guest.invite_name }}</span>
+          <font-awesome-icon :icon="['fas', 'qrcode']" @click="scanInvite(guest.id)" />
         </div>
       </div>
       <p><b>Presente: </b>Não existe presente definido</p>
       <div class="guests-options">
         <div>
-          <button><font-awesome-icon :icon="['fas', 'gift']" /></button>
+          <button @click="giftList"><font-awesome-icon :icon="['fas', 'gift']" /></button>
           <span>Lista de presentes</span>
         </div>
         <div>
-          <button>
+          <button @click="editInvite">
             <font-awesome-icon :icon="['fas', 'pen-to-square']" />
           </button>
           <span>Editar convites</span>

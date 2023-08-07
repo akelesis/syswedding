@@ -10,7 +10,7 @@ export default {
   data() {
     return {
       email: '',
-      password: '',
+      password: ''
     }
   },
   methods: {
@@ -28,6 +28,8 @@ export default {
               }
             })
             .then((res) => {
+              localStorage.setItem('guestId', res.data.id) 
+
               if (res.data.status === 'inactive') {
                 this.$router.push('/guest-confirm?id=' + res.data.id)
               }
@@ -35,9 +37,10 @@ export default {
                 alert('Usuário declinou o convite!')
                 window.location.href = 'https://www.parperfeito.com.br'
               } else {
-                this.$router.push('/confirm-attendance')
+                this.$router.push('/confirm-attendance?id=' + res.data.id)
               }
-            }).catch((err) => {
+            })
+            .catch((err) => {
               console.log(err)
             })
         })
