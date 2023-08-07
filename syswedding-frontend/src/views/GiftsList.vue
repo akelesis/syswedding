@@ -33,7 +33,7 @@ export default {
 
 <template>
   <div class="gifts-area">
-    <layout-component>
+    <layout-component name="Marquito">
       <div class="title">
         <h3>Lista de presentes:</h3>
         <Underline width="145px" />

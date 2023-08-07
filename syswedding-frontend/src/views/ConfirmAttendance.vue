@@ -6,17 +6,8 @@ import InputGuest from '@/components/InputGuest.vue'
 import ConfirmGuest from '@/components/ConfirmGuest.vue'
 import axios from 'axios'
 import { baseUrl } from '@/global'
-
-interface GuestProps {
-  id: string
-  name: string
-  email: string
-  password: string
-  gift_item_id: string
-  status: string
-  phone: string
-  invites: number
-}
+import type { GuestProps } from '../models/GuestProps.model'
+import type { InviteProps } from "../models/InviteProps.model"
 
 export default {
   data() {
@@ -24,24 +15,42 @@ export default {
       confirmedGuests: [] as string[],
       guestsInput: [] as string[],
       guest: {} as GuestProps,
-      invites: 0
+      total_invites: 0,
+      invites: [] as Array<InviteProps>,
+      usedInvites: 0
     }
   },
   methods: {
     confirmationButtonHandler() {
-      this.$router.push('/')
+      this.$router.push('/guests?id=' + this.guest.id)
     },
     addGuest() {
       this.guestsInput.push('')
-      this.invites--
+      this.total_invites--
     },
     removeGuest() {
-      if (this.invites < this.guest.invites) {
+      if (this.total_invites < this.guest.total_invites - this.usedInvites) {
         this.guestsInput.pop()
-        this.invites++
+        this.total_invites++
       }
     },
-    showData(index: number) {
+    saveInvite(index: number) {
+      axios
+        .post(
+          `${baseUrl}/invite`,
+          {
+            invite_name: this.guestsInput[index],
+            guest_id: this.guest.id
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('guestToken')}`
+            }
+          }
+        )
+        .then(() => {
+          this.usedInvites++
+        })
       this.confirmedGuests.push(this.guestsInput[index])
       this.guestsInput.pop()
     },
@@ -57,6 +66,12 @@ export default {
         .then((res) => {
           this.guest = res.data
           this.invites = this.guest.invites
+          this.total_invites = this.guest.total_invites - this.invites.length
+          this.usedInvites = this.invites.length
+
+          this.invites.forEach((element) => {
+            this.confirmedGuests.push(element.invite_name)
+          })
         })
     }
   },
@@ -85,18 +100,18 @@ export default {
           type="text"
           placeholder="Nome completo"
           v-model="guestsInput[index]"
-          @save-guest="showData(index)"
+          @save-guest="saveInvite(index)"
         />
       </div>
       <div class="guests-control">
         <button @click="removeGuest"><font-awesome-icon :icon="['fas', 'minus']" /></button>
-        <span>{{ invites }}</span>
-        <button :disabled="invites === 0 ? true : false" @click="addGuest">
+        <span>{{ total_invites }}</span>
+        <button :disabled="total_invites === 0 ? true : false" @click="addGuest">
           <font-awesome-icon :icon="['fas', 'plus']" />
         </button>
       </div>
       <div class="button-container">
-        <confirm-button label="Sair" @click="confirmationButtonHandler"></confirm-button>
+        <confirm-button label="Finalizar" @click="confirmationButtonHandler"></confirm-button>
       </div>
     </layout-component>
   </div>

@@ -7,13 +7,16 @@ import QrcodeVue from 'qrcode.vue'
 
 export default {
   data() {
-    return {
-      qrCode: 'https://invitez.com.br/evento/j3h5iyu234/convidado/5jkl34h5'
-    }
+    return {}
   },
   methods: {
     confirmationButtonHandler() {
-      this.$router.push('/guests')
+      this.$router.push('/guests?id=' + localStorage.getItem('guestId'))
+    },
+  },
+  computed: {
+    qrCode() {
+      return `https://invitez.com.br?invite=${this.$route.query.id}`
     }
   },
   components: {
@@ -27,7 +30,7 @@ export default {
 
 <template>
   <div class="gifts-area">
-    <layout-component>
+    <layout-component name="Marquinho">
       <div class="title">Apresente esta tela na entrada do casamento</div>
 
       <div class="qrcode-container">

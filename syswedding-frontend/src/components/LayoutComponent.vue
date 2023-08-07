@@ -8,7 +8,8 @@ export default {
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
+      default: 'nome'
     }
   }
 }

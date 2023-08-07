@@ -4,16 +4,7 @@ import ConfirmButton from '../components/ConfirmButton.vue'
 import LayoutComponent from '@/components/LayoutComponent.vue'
 import { baseUrl } from '@/global'
 import axios from 'axios'
-
-interface GuestProps {
-  id: string
-  name: string
-  email: string
-  password: string
-  gift_item_id: string
-  status: string
-  phone: string
-}
+import type { GuestProps } from '../models/GuestProps.model'
 
 export default {
   data() {
