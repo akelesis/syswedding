@@ -28,12 +28,11 @@ export default {
               }
             })
             .then((res) => {
-              localStorage.setItem('guestId', res.data.id) 
+              localStorage.setItem('guestId', res.data.id)
 
               if (res.data.status === 'inactive') {
                 this.$router.push('/guest-confirm?id=' + res.data.id)
-              }
-              if (res.data.status === 'cancelled') {
+              } else if (res.data.status === 'cancelled') {
                 alert('Usuário declinou o convite!')
                 window.location.href = 'https://www.parperfeito.com.br'
               } else {
