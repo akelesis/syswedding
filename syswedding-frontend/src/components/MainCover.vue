@@ -3,7 +3,7 @@
 <template>
   <section class="homepage-cover">
     <div>
-      <h3>Estamos felizes por compartilhar o nosso dia especial com você</h3>
+      <h3>Estamos felizes por compartilhar o nosso dia especial com você!</h3>
       <h1>Marcus e Carina</h1>
     </div>
   </section>
@@ -32,7 +32,7 @@
     h3 {
       text-align: center;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 14px;
+      font-size: 18px;
       color: #656565;
     }
     h1 {

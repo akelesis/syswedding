@@ -28,7 +28,7 @@ export default {
   font-size: 21px;
 
   span {
-    font-size: 10px;
+    font-size: 16px;
   }
 }
 </style>

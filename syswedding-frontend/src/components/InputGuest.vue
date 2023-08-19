@@ -53,7 +53,7 @@ export default {
   }
   ::placeholder {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 12px;
+    font-size: 16px;
     color: #d0d0d0;
   }
   input:focus {

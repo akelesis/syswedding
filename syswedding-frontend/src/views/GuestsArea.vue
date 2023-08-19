@@ -18,8 +18,6 @@ export default {
         .patch(`${baseUrl}/guest/${this.guest.phone}`, {
           status: 'active',
           email: this.guest.email,
-          password: this.guest.password,
-          confirm_password: this.guest.password,
           gift_item_id: ''
         })
         .then(() => {
@@ -31,8 +29,6 @@ export default {
         .patch(`${baseUrl}/guest/${this.guest.phone}`, {
           status: 'cancelled',
           email: this.guest.email,
-          password: this.guest.password,
-          confirm_password: this.guest.password,
           gift_item_id: ''
         })
         .then(() => {

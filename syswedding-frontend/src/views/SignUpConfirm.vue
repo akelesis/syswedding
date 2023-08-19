@@ -2,7 +2,6 @@
 import Underline from '@/components/Underline.vue'
 import router from '@/router'
 import ConfirmButton from '../components/ConfirmButton.vue'
-import InputComponent from '@/components/InputComponent.vue'
 import axios from 'axios'
 import { baseUrl } from '../global'
 
@@ -21,14 +20,14 @@ export default {
   components: {
     ConfirmButton,
     Underline,
-    InputComponent
   },
   methods: {
     confirmationButtonHandler() {
+
       if (this.guestStatus === 'inactive') {
-        this.$router.push('/guest-confirm?id=' + this.guestId)
+        this.$router.push('/guest-confirm?id=' + this.$route.query.id)
       } else {
-        this.$router.push('/confirm-attendance')
+        this.$router.push('/confirm-attendance?id=' + this.$route.query.id)
       }
     },
     getGuest() {
@@ -44,8 +43,6 @@ export default {
           this.guestName = res.data.name
           this.guestStatus = res.data.status
           this.guestId = res.data.id
-          console.log(res.data)
-          console.log(this.guestStatus)
         })
     }
   },

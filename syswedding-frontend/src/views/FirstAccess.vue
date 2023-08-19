@@ -1,11 +1,9 @@
 <script lang="ts">
 import Underline from '@/components/Underline.vue'
-import router from '@/router'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import InputComponent from '@/components/InputComponent.vue'
 import axios from 'axios'
 import { baseUrl } from '../global'
-import GiftsList from './GiftsList.vue'
 
 export default {
   data() {
@@ -29,7 +27,8 @@ export default {
             email: this.email,
             password: this.password,
             confirm_password: this.confirmPassword,
-            gift_item_id: this.giftItem
+            gift_item_id: this.giftItem,
+            status: 'inactive',
           })
           .then((res) => {
             if (res.data.status != 404) {
@@ -53,9 +52,6 @@ export default {
       }
     }
   },
-  // computed: {
-  //   ...mapState(useStore, ['guestToken'])
-  // },
   components: {
     ConfirmButton,
     Underline,
@@ -111,6 +107,7 @@ export default {
     font-family: 'Cormorant Garamond', serif;
     text-align: center;
     margin-top: 20px;
+    font-size: 18px;
     color: #949494;
   }
 

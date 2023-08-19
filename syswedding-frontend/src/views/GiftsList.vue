@@ -1,5 +1,4 @@
 <script lang="ts">
-import router from '@/router'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import LayoutComponent from '@/components/LayoutComponent.vue'
 import Underline from '@/components/Underline.vue'
@@ -19,7 +18,6 @@ export default {
   },
   methods: {
     confirmationButtonHandler() {
-      console.log(this.chosenGift)
       this.$router.push('/guests')
     }
   },
@@ -116,7 +114,7 @@ export default {
       }
 
       label {
-        font-size: 10px;
+        font-size: 16px;
         color: #949494;
         font-family: 'Roboto Condensed', sans-serif;
       }

@@ -1,18 +1,35 @@
 <script lang="ts">
-import router from '@/router'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import LayoutComponent from '@/components/LayoutComponent.vue'
-import Underline from '@/components/Underline.vue'
 import QrcodeVue from 'qrcode.vue'
+import axios from 'axios'
+import { baseUrl } from '@/global'
 
 export default {
   data() {
-    return {}
+    return {
+      guestName: "",
+    }
   },
   methods: {
     confirmationButtonHandler() {
       this.$router.push('/guests?id=' + localStorage.getItem('guestId'))
     },
+    getGuest() {
+      const guestToken = localStorage.getItem('guestToken')
+      axios
+        .get(`${baseUrl}/guest/${localStorage.getItem('guestId')}`, {
+          headers: {
+            Authorization: `Bearer ${guestToken}`
+          }
+        })
+        .then((res) => {
+          this.guestName = res.data.name
+        })
+    }
+  },
+  mounted() {
+    this.getGuest()
   },
   computed: {
     qrCode() {
@@ -22,7 +39,6 @@ export default {
   components: {
     ConfirmButton,
     LayoutComponent,
-    Underline,
     QrcodeVue
   }
 }
@@ -30,7 +46,7 @@ export default {
 
 <template>
   <div class="gifts-area">
-    <layout-component name="Marquinho">
+    <layout-component :name="guestName">
       <div class="title">Apresente esta tela na entrada do casamento</div>
 
       <div class="qrcode-container">

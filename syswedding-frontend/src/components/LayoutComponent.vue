@@ -44,8 +44,11 @@ export default {
       text-align: start;
       font-family: 'Cormorant Garamond', serif;
       color: #949494;
-      font-size: 20px;
+      font-size: 22px;
       margin-left: 15px;
+      @media (min-width: 500px) {
+        font-size: 24px;
+      }
     }
   }
 }

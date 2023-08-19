@@ -64,12 +64,12 @@ export default {
         <Underline width="200px" />
       </div>
       <div class="guests-container">
-        <div v-for="guest in confirmedGuests" class="confirm-guest">
+        <div v-for="guest, index in confirmedGuests" class="confirm-guest" :key="index">
           <span>{{ guest.invite_name }}</span>
           <font-awesome-icon :icon="['fas', 'qrcode']" @click="scanInvite(guest.id)" />
         </div>
       </div>
-      <p><b>Presente: </b>Não existe presente definido</p>
+      <p><strong>Presente: </strong>Não existe presente definido</p>
       <div class="guests-options">
         <div>
           <button @click="giftList"><font-awesome-icon :icon="['fas', 'gift']" /></button>
@@ -121,7 +121,7 @@ export default {
 
       span {
         font-family: 'Roboto Condensed', sans-serif;
-        font-size: 10px;
+        font-size: 16px;
       }
     }
   }
@@ -132,7 +132,7 @@ export default {
 
   p {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 10px;
+    font-size: 16px;
     color: #989898;
     margin-top: 70px;
   }
@@ -162,7 +162,7 @@ export default {
 
       span {
         font-family: 'Cormorant Garamond', serif;
-        font-size: 10px;
+        font-size: 16px;
         color: #949494;
         margin-top: 5px;
       }

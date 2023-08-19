@@ -1,5 +1,4 @@
 <script lang="ts">
-import router from '@/router'
 import ConfirmButton from '../components/ConfirmButton.vue'
 import LayoutComponent from '@/components/LayoutComponent.vue'
 import InputGuest from '@/components/InputGuest.vue'
@@ -94,13 +93,14 @@ export default {
         Que legal, confirma então as informações de quem vai estar lá (incluindo você, é claro)
       </div>
       <div class="guests-container">
-        <confirm-guest v-for="guest in confirmedGuests" :label="guest" />
+        <confirm-guest v-for="guest in confirmedGuests" :label="guest" :key="guest" />
         <input-guest
           v-for="(guest, index) in guestsInput"
           type="text"
           placeholder="Nome completo"
           v-model="guestsInput[index]"
           @save-guest="saveInvite(index)"
+          :key="index"
         />
       </div>
       <div class="guests-control">
@@ -125,11 +125,15 @@ export default {
 .confirm-area {
   .confirm-subtitle {
     width: 85%;
+    font-size: 18px;
     font-family: 'Cormorant Garamond', serif;
     text-align: center;
     margin-top: 20px;
     color: #949494;
     padding: 30px 0 35px 0;
+    @media(min-width: 500px) {
+      font-size: 22px;
+    }
   }
 
   .guests-container {
