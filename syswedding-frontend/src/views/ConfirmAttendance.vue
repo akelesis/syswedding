@@ -6,7 +6,7 @@ import ConfirmGuest from '@/components/ConfirmGuest.vue'
 import axios from 'axios'
 import { baseUrl } from '@/global'
 import type { GuestProps } from '../models/GuestProps.model'
-import type { InviteProps } from "../models/InviteProps.model"
+import type { InviteProps } from '../models/InviteProps.model'
 
 export default {
   data() {
@@ -51,7 +51,7 @@ export default {
           this.usedInvites++
         })
       this.confirmedGuests.push(this.guestsInput[index])
-      this.guestsInput.pop()
+      this.guestsInput.splice(index, 1)
     },
     getGuest() {
       const guestToken = localStorage.getItem('guestToken')
@@ -131,7 +131,7 @@ export default {
     margin-top: 20px;
     color: #949494;
     padding: 30px 0 35px 0;
-    @media(min-width: 500px) {
+    @media (min-width: 500px) {
       font-size: 22px;
     }
   }
