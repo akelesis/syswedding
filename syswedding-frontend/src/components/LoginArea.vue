@@ -1,5 +1,5 @@
 <script lang="ts">
-import router from '@/router'
+/* import router from '@/router' */
 import ConfirmButton from './ConfirmButton.vue'
 import InputComponent from './InputComponent.vue'
 import Underline from './Underline.vue'
@@ -68,9 +68,9 @@ export default {
         <input-component type="text" v-model="email" placeholder="Email" />
         <input-component type="password" v-model="password" placeholder="Senha" />
       </div>
-      <div class="first-access-link">
+      <!-- <div class="first-access-link">
         <router-link to="/first-access">É o seu primeiro acesso? então clique aqui!</router-link>
-      </div>
+      </div> -->
       <confirm-button label="Entrar" @click="guestLogin"></confirm-button>
       <div class="password-recovery">
         <router-link to="/password-recovery">Esqueceu a senha? Clique aqui!</router-link>
